@@ -1,0 +1,77 @@
+basePath: /api/v1
+definitions:
+  model.Signin:
+    properties:
+      password:
+        example: kira
+        type: string
+      username:
+        example: jeffrey
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  response.HTTPError:
+    properties:
+      code:
+        example: 401
+        type: integer
+      message:
+        example: Unauthorized
+        type: string
+    type: object
+  response.SigninSuccess:
+    properties:
+      token:
+        type: string
+    type: object
+host: localhost:5608
+info:
+  contact:
+    name: API Support
+    url: https://github.com/jeffreykira/log-management.git
+  description: Documentation of Sample API.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Sample API
+  version: 1.0.0
+paths:
+  /auth/signin:
+    post:
+      consumes:
+      - application/json
+      description: Sign in to get jwt token
+      parameters:
+      - description: signin information
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/model.Signin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.SigninSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.HTTPError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/response.HTTPError'
+      summary: sign in
+      tags:
+      - Auth
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
