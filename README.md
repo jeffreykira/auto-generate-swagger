@@ -9,4 +9,6 @@ Use [swaggo](https://github.com/swaggo/swag) to auto generate Swagger API doc.
     2. http://localhost:5608/swagger/index.html
 
 - How to update API doc
-    ```swag init --parseDependency=true -d cmd```
+    ```
+    swag init --parseDependency=true -d cmd
+    ```
