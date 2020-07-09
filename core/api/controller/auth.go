@@ -2,15 +2,24 @@ package controller
 
 import (
 	"net/http"
+	"os"
 	"strconv"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
-	"github.com/jeffreykira/log-management/service/server/api/middleware"
-	"github.com/jeffreykira/log-management/service/server/api/model"
-	"github.com/jeffreykira/log-management/service/server/api/response"
+	"github.com/jeffreykira/log-management/core/api/middleware"
+	"github.com/jeffreykira/log-management/core/api/model"
+	"github.com/jeffreykira/log-management/core/api/response"
+
+	log "github.com/mgutz/logxi/v1"
 )
+
+var logger log.Logger
+
+func init() {
+	logger = log.NewLogger(log.NewConcurrentWriter(os.Stdout), "auth")
+}
 
 // SigninValid godoc
 // @Summary sign in
@@ -24,12 +33,15 @@ import (
 // @Failure 401 {object} response.HTTPError
 // @Router /auth/signin [post]
 func (c *Controller) SigninValid(ctx *gin.Context) {
+	logger.Debug("SigninValid start")
+
 	var reqBody model.Signin
 	if err := ctx.ShouldBindJSON(&reqBody); err != nil {
 		ctx.JSON(http.StatusBadRequest, response.HTTPError{
 			Code:    400,
 			Message: err.Error(),
 		})
+		logger.Error("bad request", "message", err.Error())
 		return
 	}
 
@@ -38,6 +50,7 @@ func (c *Controller) SigninValid(ctx *gin.Context) {
 			Code:    401,
 			Message: "validation error",
 		})
+		logger.Error("validation error", "username", reqBody.Username, "password", reqBody.Password)
 		return
 	}
 
@@ -64,6 +77,7 @@ func (c *Controller) SigninValid(ctx *gin.Context) {
 			Code:    500,
 			Message: err.Error(),
 		})
+		logger.Error("internal error", "message", err.Error())
 		return
 	}
 

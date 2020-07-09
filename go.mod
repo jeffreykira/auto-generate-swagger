@@ -14,7 +14,7 @@ require (
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/mailru/easyjson v0.7.1 // indirect
 	github.com/mattn/go-colorable v0.1.7 // indirect
-	github.com/mgutz/ansi v0.0.0-20170206155736-9520e82c474b // indirect
+	github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d // indirect
 	github.com/mgutz/logxi v0.0.0-20161027140823-aebf8a7d67ab
 	github.com/swaggo/files v0.0.0-20190704085106-630677cd5c14
 	github.com/swaggo/gin-swagger v1.2.0
