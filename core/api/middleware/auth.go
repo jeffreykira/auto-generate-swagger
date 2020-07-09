@@ -6,8 +6,8 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
-	"github.com/jeffreykira/log-management/service/server/api/model"
-	"github.com/jeffreykira/log-management/service/server/api/response"
+	"github.com/jeffreykira/log-management/core/api/model"
+	"github.com/jeffreykira/log-management/core/api/response"
 )
 
 //AgentToken ...

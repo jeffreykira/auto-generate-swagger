@@ -1,13 +1,15 @@
 package main
 
 import (
+	"os"
+
 	_ "github.com/jeffreykira/log-management/docs"
 
-	"github.com/jeffreykira/log-management/service/server/api/router"
-	// log "github.com/mgutz/logxi/v1"
+	"github.com/jeffreykira/log-management/core/api/router"
+	log "github.com/mgutz/logxi/v1"
 )
 
-// var logger log.Logger
+var logger log.Logger
 
 // @title Sample API
 // @version 1.0.0
@@ -27,6 +29,22 @@ import (
 // @in header
 // @name Authorization
 func main() {
+	// create a logger with a unique identifier which
+	// can be enabled from environment variables
+	logger = log.New("main")
+	logger.Debug("start")
+
+	// specify a writer, use NewConcurrentWriter if it is not concurrent safe
+	modelLogger := log.NewLogger(log.NewConcurrentWriter(os.Stdout), "model")
+	modelLogger.Info("test", "show", "info level")
+
+	fruit := "apple"
+	languages := []string{"go", "javascript"}
+	if log.IsDebug() {
+		// use key-value pairs after message
+		logger.Debug("OK", "fruit", fruit, "languages", languages)
+	}
+
 	r := router.NewRouter()
 	r.Run(":5608")
 }

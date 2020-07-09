@@ -1,5 +1,27 @@
 # log-management
 
+## Log Configuration
+
+- defaults to showing warnings and above
+    ```
+    go run cmd/main.go
+    ```
+- show all logs
+    ```
+    LOGXI=* go run cmd/main.go
+    ```
+- auth show debug, other show error log
+    ```
+    LOGXI=*=ERR,auth=DBG go run cmd/main.go
+    ```
+- auth close log, other show debug log
+    ```
+    LOGXI=*=DBG,auth=OFF go run cmd/main.go
+    ```
+- set all to Error and set data related packages to Debug
+    ```
+    LOGXI=*=ERR,dat*=DBG go run cmd/main.go
+    ```
 
 ## Swagger API Doc
 Use [swaggo](https://github.com/swaggo/swag) to auto generate Swagger API doc.
