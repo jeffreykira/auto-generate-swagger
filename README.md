@@ -1,4 +1,4 @@
-# log-management
+# auto-generate-swagger
 
 ## Log Configuration
 
